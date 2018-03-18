@@ -1,0 +1,29 @@
+
+# Id: CSPT-1.1.2
+# Status: Proposed
+# Service: Kublet API
+# Components:
+#   - API
+# STRIDE:
+#   - Elevation of privilege
+#   - Information disclosure
+# References:
+#   - https://medium.com/handy-tech/analysis-of-a-kubernetes-hack-backdooring-through-kubelet-823be5c3d67c
+
+
+Feature: Abusing kubelet API
+  In order to gain full control over the cluster
+  As an attacker
+  I can use the kubelet API without authentication
+
+
+  Scenario: Kubelet API exposed to the internet
+    Given a cluster, with Kubelet ports exposed to the internet
+    And no authentication enabled on Kubelet
+    Then the attacker can access access the full API without authentication
+
+    Examples: Data types
+      | Secrets           |
+      | Nodes             |
+      | Containers        |
+      | Pods              |
